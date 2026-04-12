@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { MY_BOOKINGS } from '@/lib/graphql/queries';
 import { CANCEL_BOOKING } from '@/lib/graphql/mutations';
 import Button from '@/components/ui/Button';
-import Spinner from '@/components/ui/Spinner';
+import { SkeletonBookingCard } from '@/components/ui/Skeleton';
 import { useToast } from '@/components/ui/Toast';
 
 interface BookingService {
@@ -75,8 +75,11 @@ export default function BookingsPage() {
 
   if (loading) {
     return (
-      <div className="py-12 flex justify-center">
-        <Spinner />
+      <div>
+        <h1 className="text-2xl font-bold text-stone-900 mb-6">My Bookings</h1>
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => <SkeletonBookingCard key={i} />)}
+        </div>
       </div>
     );
   }

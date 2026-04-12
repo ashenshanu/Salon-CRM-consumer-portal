@@ -3,6 +3,7 @@ import { Geist } from 'next/font/google';
 import './globals.css';
 import ApolloClientProvider from '@/components/providers/ApolloProvider';
 import { ToastProvider } from '@/components/ui/Toast';
+import ErrorBoundary from '@/components/ui/ErrorBoundary';
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' });
 
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-stone-50 text-stone-900">
         <ApolloClientProvider>
           <ToastProvider>
-            {children}
+            <ErrorBoundary>
+              {children}
+            </ErrorBoundary>
           </ToastProvider>
         </ApolloClientProvider>
       </body>

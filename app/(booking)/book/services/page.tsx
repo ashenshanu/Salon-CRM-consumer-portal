@@ -7,6 +7,7 @@ import { useBookingStore } from '@/lib/bookingStore';
 import { SERVICES } from '@/lib/graphql/queries';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
+import { SkeletonServiceCard } from '@/components/ui/Skeleton';
 
 interface ServiceVariant {
   id: string;
@@ -70,8 +71,8 @@ export default function ServicesPage() {
 
   if (loading) {
     return (
-      <div className="py-12 flex justify-center">
-        <Spinner />
+      <div className="py-4 space-y-2">
+        {[1, 2, 3, 4, 5].map((i) => <SkeletonServiceCard key={i} />)}
       </div>
     );
   }

@@ -21,7 +21,9 @@ export default function VerifyOtpPage() {
 
   const email = typeof window !== 'undefined' ? sessionStorage.getItem('signup_email') : null;
 
-  const [verifyOtp, { loading: verifying }] = useMutation<{ verifyOtp: { token: string } }>(VERIFY_OTP);
+  const [verifyOtp, { loading: verifying }] = useMutation<{
+    verifyOtp: { token: string; user: { accountValidity: string; loyaltyScore: number } };
+  }>(VERIFY_OTP);
   const [resendOtp, { loading: resending }] = useMutation(RESEND_OTP);
 
   // Redirect if no email in session
@@ -72,11 +74,13 @@ export default function VerifyOtpPage() {
 
     try {
       const { data } = await verifyOtp({ variables: { email, otp } });
-      const { token } = data!.verifyOtp;
+      const { token, user } = data!.verifyOtp;
       await setSessionToken(token);
       sessionStorage.removeItem('signup_email');
       toast('Account verified! Welcome to Ashen.', 'success');
-      router.push('/account');
+      // New accounts (pending → active) should set a password first
+      const isNewAccount = user.accountValidity === 'active' && user.loyaltyScore === 0;
+      router.push(isNewAccount ? '/set-password' : '/account');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Verification failed. Please try again.';
       setServerError(msg);

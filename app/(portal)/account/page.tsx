@@ -3,7 +3,7 @@
 import { useQuery } from '@apollo/client/react';
 import Link from 'next/link';
 import { ME } from '@/lib/graphql/queries';
-import Spinner from '@/components/ui/Spinner';
+import { SkeletonCard } from '@/components/ui/Skeleton';
 
 interface User {
   id: string;
@@ -20,8 +20,12 @@ export default function AccountPage() {
 
   if (loading) {
     return (
-      <div className="py-12 flex justify-center">
-        <Spinner />
+      <div>
+        <div className="h-8 w-48 bg-stone-200 animate-pulse rounded mb-2" />
+        <div className="h-4 w-64 bg-stone-100 animate-pulse rounded mb-8" />
+        <div className="grid sm:grid-cols-3 gap-4 mb-8">
+          {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+        </div>
       </div>
     );
   }
