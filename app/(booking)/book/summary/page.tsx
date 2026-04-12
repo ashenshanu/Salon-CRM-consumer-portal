@@ -147,7 +147,7 @@ export default function SummaryPage() {
     return (
       <div className="py-12 flex flex-col items-center gap-3">
         <Spinner />
-        <p className="text-stone-500 text-sm">Reserving your slot&hellip;</p>
+        <p className="text-slate-500 text-sm">Reserving your slot&hellip;</p>
       </div>
     );
   }
@@ -167,26 +167,26 @@ export default function SummaryPage() {
     <div className="py-4">
       <div className="flex items-start justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-stone-900 mb-1">Review &amp; confirm</h1>
-          <p className="text-stone-500 text-sm">Check your booking details before confirming.</p>
+          <h1 className="text-2xl font-bold text-slate-900 mb-1">Review &amp; confirm</h1>
+          <p className="text-slate-500 text-sm">Check your booking details before confirming.</p>
         </div>
         {expiresAt && (
           <CountdownTimer expiresAt={expiresAt} onExpire={handleExpire} className="shrink-0" />
         )}
       </div>
 
-      <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 space-y-5 mb-6">
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5 mb-6">
         {/* Services */}
         <div>
-          <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">
+          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
             Services
           </h2>
           <ul className="space-y-1">
             {selectedServices.map((svc) => (
               <li key={svc.id} className="flex items-center justify-between">
-                <span className="text-stone-900 text-sm font-medium">{svc.name}</span>
+                <span className="text-slate-900 text-sm font-medium">{svc.name}</span>
                 {svc.variants.length > 0 && (
-                  <span className="text-stone-500 text-sm">
+                  <span className="text-slate-500 text-sm">
                     From £{Math.min(...svc.variants.map((v) => v.price)).toFixed(2)}
                   </span>
                 )}
@@ -195,27 +195,27 @@ export default function SummaryPage() {
           </ul>
         </div>
 
-        <div className="border-t border-stone-100" />
+        <div className="border-t border-slate-100" />
 
         {/* Date & Time */}
         <div>
-          <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">
+          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
             Date &amp; Time
           </h2>
-          <p className="text-stone-900 text-sm font-medium">
+          <p className="text-slate-900 text-sm font-medium">
             {bookingDate ? formatDate(bookingDate) : '—'}
           </p>
-          <p className="text-stone-500 text-sm">{bookingTime}</p>
+          <p className="text-slate-500 text-sm">{bookingTime}</p>
         </div>
 
-        <div className="border-t border-stone-100" />
+        <div className="border-t border-slate-100" />
 
         {/* Staff */}
         <div>
-          <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">
+          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
             Stylist
           </h2>
-          <p className="text-stone-900 text-sm font-medium">
+          <p className="text-slate-900 text-sm font-medium">
             {isStaffSalonChoice ? "Salon's choice" : 'Selected stylist'}
           </p>
         </div>
@@ -223,15 +223,15 @@ export default function SummaryPage() {
         {/* Recipient */}
         {recipientType === 'other' && recipientDetails && (
           <>
-            <div className="border-t border-stone-100" />
+            <div className="border-t border-slate-100" />
             <div>
-              <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">
+              <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
                 Recipient
               </h2>
-              <p className="text-stone-900 text-sm font-medium">
+              <p className="text-slate-900 text-sm font-medium">
                 {recipientDetails.firstName} {recipientDetails.lastName}
               </p>
-              <p className="text-stone-500 text-sm">{recipientDetails.phone}</p>
+              <p className="text-slate-500 text-sm">{recipientDetails.phone}</p>
             </div>
           </>
         )}
@@ -239,21 +239,21 @@ export default function SummaryPage() {
         {/* Guest email */}
         {isGuestFlow && guestEmail && (
           <>
-            <div className="border-t border-stone-100" />
+            <div className="border-t border-slate-100" />
             <div>
-              <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">
+              <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
                 Confirmation Email
               </h2>
-              <p className="text-stone-900 text-sm font-medium">{guestEmail}</p>
+              <p className="text-slate-900 text-sm font-medium">{guestEmail}</p>
             </div>
           </>
         )}
 
-        <div className="border-t border-stone-100" />
+        <div className="border-t border-slate-100" />
 
         {/* Notes */}
         <div>
-          <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-2">
+          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
             Notes (optional)
           </h2>
           <textarea
@@ -261,7 +261,7 @@ export default function SummaryPage() {
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Any special requests or instructions..."
             rows={3}
-            className="w-full rounded-lg border border-stone-300 px-3 py-2 text-sm text-stone-900 placeholder-stone-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400 resize-none"
+            className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 resize-none"
           />
         </div>
       </div>

@@ -56,8 +56,8 @@ export default function StaffPage() {
   return (
     <div className="py-4">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-900 mb-1">Choose your stylist</h1>
-        <p className="text-stone-500 text-sm">Select a staff member or let us assign one for you.</p>
+        <h1 className="text-2xl font-bold text-slate-900 mb-1">Choose your stylist</h1>
+        <p className="text-slate-500 text-sm">Select a staff member or let us assign one for you.</p>
       </div>
 
       <div className="space-y-3 mb-6">
@@ -66,20 +66,20 @@ export default function StaffPage() {
           className={[
             'w-full rounded-xl border p-4 text-left transition-all',
             isStaffSalonChoice
-              ? 'border-stone-900 bg-stone-50 shadow-sm'
-              : 'border-stone-200 bg-white hover:border-stone-400',
+              ? 'border-primary bg-primary/5 shadow-sm'
+              : 'border-slate-100 bg-white hover:border-slate-300',
           ].join(' ')}
         >
           <div className="flex items-center gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-stone-200 text-stone-600 font-semibold text-sm">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-200 text-slate-600 font-semibold text-sm">
               ?
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-stone-900">No preference</p>
-              <p className="text-sm text-stone-500">We&apos;ll assign the best available stylist</p>
+              <p className="font-semibold text-slate-900">No preference</p>
+              <p className="text-sm text-slate-500">We&apos;ll assign the best available stylist</p>
             </div>
             {isStaffSalonChoice && (
-              <div className="h-5 w-5 rounded-full bg-stone-900 flex items-center justify-center shrink-0">
+              <div className="h-5 w-5 rounded-full bg-primary flex items-center justify-center shrink-0">
                 <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
@@ -95,7 +95,7 @@ export default function StaffPage() {
         ) : error ? (
           <p className="text-sm text-red-600 py-2">{error.message}</p>
         ) : staff.length === 0 ? (
-          <p className="text-sm text-stone-500 py-2 text-center">
+          <p className="text-sm text-slate-500 py-2 text-center">
             No specific staff available — please select &ldquo;No preference&rdquo;.
           </p>
         ) : (
@@ -108,21 +108,21 @@ export default function StaffPage() {
                 className={[
                   'w-full rounded-xl border p-4 text-left transition-all',
                   isSelected
-                    ? 'border-stone-900 bg-stone-50 shadow-sm'
-                    : 'border-stone-200 bg-white hover:border-stone-400',
+                    ? 'border-primary bg-primary/5 shadow-sm'
+                    : 'border-slate-100 bg-white hover:border-slate-300',
                 ].join(' ')}
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-stone-900 text-white font-semibold text-sm uppercase">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white font-semibold text-sm uppercase">
                     {member.firstName[0]}{member.lastName[0]}
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-stone-900">
+                    <p className="font-semibold text-slate-900">
                       {member.firstName} {member.lastName}
                     </p>
                   </div>
                   {isSelected && (
-                    <div className="h-5 w-5 rounded-full bg-stone-900 flex items-center justify-center shrink-0">
+                    <div className="h-5 w-5 rounded-full bg-primary flex items-center justify-center shrink-0">
                       <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>

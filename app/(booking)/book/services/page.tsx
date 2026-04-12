@@ -86,14 +86,14 @@ export default function ServicesPage() {
   return (
     <div className="py-4">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-900 mb-1">Select services</h1>
-        <p className="text-stone-500 text-sm">Choose one or more services for your appointment.</p>
+        <h1 className="text-2xl font-bold text-slate-900 mb-1">Select services</h1>
+        <p className="text-slate-500 text-sm">Choose one or more services for your appointment.</p>
       </div>
 
       <div className="space-y-6 mb-8">
         {Object.entries(grouped).map(([category, services]) => (
           <div key={category}>
-            <h2 className="text-xs font-semibold text-stone-400 uppercase tracking-wide mb-3">
+            <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">
               {category}
             </h2>
             <div className="space-y-2">
@@ -106,8 +106,8 @@ export default function ServicesPage() {
                     className={[
                       'w-full rounded-xl border p-4 text-left transition-all',
                       isSelected
-                        ? 'border-stone-900 bg-stone-50 shadow-sm'
-                        : 'border-stone-200 bg-white hover:border-stone-400',
+                        ? 'border-primary bg-primary/5 shadow-sm'
+                        : 'border-slate-100 bg-white hover:border-slate-300',
                     ].join(' ')}
                   >
                     <div className="flex items-start justify-between gap-3">
@@ -117,8 +117,8 @@ export default function ServicesPage() {
                             className={[
                               'flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors',
                               isSelected
-                                ? 'border-stone-900 bg-stone-900'
-                                : 'border-stone-300',
+                                ? 'border-primary bg-primary'
+                                : 'border-slate-200',
                             ].join(' ')}
                           >
                             {isSelected && (
@@ -127,17 +127,17 @@ export default function ServicesPage() {
                               </svg>
                             )}
                           </div>
-                          <span className="font-medium text-stone-900">{svc.name}</span>
+                          <span className="font-medium text-slate-900">{svc.name}</span>
                         </div>
                         {svc.description && (
-                          <p className="mt-1 ml-7 text-sm text-stone-500 line-clamp-2">
+                          <p className="mt-1 ml-7 text-sm text-slate-500 line-clamp-2">
                             {svc.description}
                           </p>
                         )}
                       </div>
                       <div className="text-right shrink-0">
-                        <p className="font-semibold text-stone-900 text-sm">{formatPrice(svc.variants)}</p>
-                        <p className="text-xs text-stone-400 mt-0.5">{formatDuration(svc.variants)}</p>
+                        <p className="font-semibold text-slate-900 text-sm">{formatPrice(svc.variants)}</p>
+                        <p className="text-xs text-slate-400 mt-0.5">{formatDuration(svc.variants)}</p>
                       </div>
                     </div>
                   </button>

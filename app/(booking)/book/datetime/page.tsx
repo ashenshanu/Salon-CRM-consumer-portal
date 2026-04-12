@@ -50,13 +50,13 @@ export default function DateTimePage() {
   return (
     <div className="py-4">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-900 mb-1">Choose a date &amp; time</h1>
-        <p className="text-stone-500 text-sm">Select when you&apos;d like your appointment.</p>
+        <h1 className="text-2xl font-bold text-slate-900 mb-1">Choose a date &amp; time</h1>
+        <p className="text-slate-500 text-sm">Select when you&apos;d like your appointment.</p>
       </div>
 
-      <div className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 space-y-6">
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-6">
         <div>
-          <label htmlFor="date" className="block text-sm font-medium text-stone-700 mb-1.5">
+          <label htmlFor="date" className="block text-sm font-medium text-slate-700 mb-1.5">
             Date
           </label>
           <input
@@ -65,12 +65,12 @@ export default function DateTimePage() {
             value={date}
             min={getMinDate()}
             onChange={handleDateChange}
-            className="block w-full rounded-lg border border-stone-300 px-3 py-2.5 text-stone-900 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400"
+            className="block w-full rounded-lg border border-slate-200 px-3 py-2.5 text-slate-900 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           />
         </div>
 
         <div>
-          <p className="text-sm font-medium text-stone-700 mb-3">Available times</p>
+          <p className="text-sm font-medium text-slate-700 mb-3">Available times</p>
           {loading ? (
             <div className="flex justify-center py-6">
               <Spinner />
@@ -78,7 +78,7 @@ export default function DateTimePage() {
           ) : error ? (
             <p className="text-sm text-red-600">{error.message}</p>
           ) : availableSlots.length === 0 ? (
-            <p className="text-sm text-stone-500 py-4 text-center">
+            <p className="text-sm text-slate-500 py-4 text-center">
               No available slots for this date. Try another day.
             </p>
           ) : (
@@ -90,8 +90,8 @@ export default function DateTimePage() {
                   className={[
                     'rounded-lg border py-2 text-sm font-medium transition-colors',
                     selectedTime === slot.time
-                      ? 'border-stone-900 bg-stone-900 text-white'
-                      : 'border-stone-200 bg-white text-stone-700 hover:border-stone-400',
+                      ? 'border-primary bg-primary text-white'
+                      : 'border-slate-100 bg-white text-slate-700 hover:border-slate-300',
                   ].join(' ')}
                 >
                   {slot.time}

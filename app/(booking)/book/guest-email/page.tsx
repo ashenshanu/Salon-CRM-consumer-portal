@@ -35,14 +35,14 @@ export default function GuestEmailPage() {
   return (
     <div className="py-4">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-900 mb-1">Your email address</h1>
-        <p className="text-stone-500 text-sm">We&apos;ll send your booking confirmation here.</p>
+        <h1 className="text-2xl font-bold text-slate-900 mb-1">Your email address</h1>
+        <p className="text-slate-500 text-sm">We&apos;ll send your booking confirmation here.</p>
       </div>
 
       <form
         onSubmit={handleSubmit}
         noValidate
-        className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 space-y-4"
+        className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-4"
       >
         <div>
           <Label htmlFor="email" required>Email address</Label>

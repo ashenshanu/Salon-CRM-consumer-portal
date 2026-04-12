@@ -20,10 +20,10 @@ export default function StepProgressBar({ currentStep, totalSteps, labels }: Ste
                 className={[
                   'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors',
                   isCompleted
-                    ? 'bg-stone-900 text-white'
+                    ? 'bg-primary text-white'
                     : isCurrent
-                    ? 'bg-stone-900 text-white ring-4 ring-stone-200'
-                    : 'bg-stone-100 text-stone-400',
+                    ? 'bg-primary text-white ring-4 ring-primary/20'
+                    : 'bg-slate-100 text-slate-400',
                 ].join(' ')}
               >
                 {isCompleted ? (
@@ -39,7 +39,7 @@ export default function StepProgressBar({ currentStep, totalSteps, labels }: Ste
                 <div
                   className={[
                     'flex-1 h-0.5 mx-1 transition-colors',
-                    isCompleted ? 'bg-stone-900' : 'bg-stone-200',
+                    isCompleted ? 'bg-primary' : 'bg-slate-200',
                   ].join(' ')}
                 />
               )}
@@ -56,7 +56,7 @@ export default function StepProgressBar({ currentStep, totalSteps, labels }: Ste
             return (
               <span
                 key={i}
-                className={`text-xs ${isCurrent ? 'text-stone-900 font-medium' : 'text-stone-400'}`}
+                className={`text-xs ${isCurrent ? 'text-slate-900 font-medium' : 'text-slate-400'}`}
               >
                 {label}
               </span>
