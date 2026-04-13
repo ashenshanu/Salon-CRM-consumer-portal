@@ -45,8 +45,14 @@ const STATUS_STYLES: Record<string, string> = {
   no_show: 'bg-red-100 text-red-600',
 };
 
+function parseDate(d: string): Date {
+  const ms = Number(d);
+  if (!isNaN(ms) && d.trim() !== '') return new Date(ms);
+  if (d.length === 10) return new Date(d + 'T00:00:00');
+  return new Date(d);
+}
 function formatDate(dateStr: string): string {
-  return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-GB', {
+  return parseDate(dateStr).toLocaleDateString('en-GB', {
     weekday: 'short',
     year: 'numeric',
     month: 'short',

@@ -91,8 +91,13 @@ function ChevronRightIcon() {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+function parseDate(d: string): Date {
+  const ms = Number(d);
+  if (!isNaN(ms) && d.trim() !== '') return new Date(ms);
+  return new Date(d);
+}
 function timeSince(dateStr: string): string {
-  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+  const days = Math.floor((Date.now() - parseDate(dateStr).getTime()) / 86400000);
   if (days === 0) return 'Today';
   if (days === 1) return '1 day ago';
   if (days < 7) return `${days} days ago`;
