@@ -39,11 +39,11 @@ export default function Modal({ open, onClose, title, children, footer }: ModalP
       <div className="w-full max-w-md rounded-xl bg-white shadow-xl">
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-stone-100">
-            <h2 className="text-base font-semibold text-stone-900">{title}</h2>
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+            <h2 className="text-base font-semibold text-slate-900">{title}</h2>
             <button
               onClick={onClose}
-              className="text-stone-400 hover:text-stone-600 transition-colors"
+              className="text-slate-400 hover:text-slate-600 transition-colors"
               aria-label="Close"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +56,7 @@ export default function Modal({ open, onClose, title, children, footer }: ModalP
         <div className="px-6 py-4">{children}</div>
         {/* Footer */}
         {footer && (
-          <div className="flex justify-end gap-2 px-6 py-4 border-t border-stone-100">
+          <div className="flex justify-end gap-2 px-6 py-4 border-t border-slate-100">
             {footer}
           </div>
         )}
@@ -103,7 +103,7 @@ export function ConfirmModal({
         </>
       }
     >
-      <p className="text-sm text-stone-600">{message}</p>
+      <p className="text-sm text-slate-600">{message}</p>
     </Modal>
   );
 }

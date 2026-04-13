@@ -1,13 +1,15 @@
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-stone-100 bg-white">
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-stone-400">
-        <p>&copy; {new Date().getFullYear()} Ashen Salon. All rights reserved.</p>
-        <div className="flex gap-4">
-          <a href="#" className="hover:text-stone-600 transition-colors">Privacy</a>
-          <a href="#" className="hover:text-stone-600 transition-colors">Terms</a>
-          <a href="#" className="hover:text-stone-600 transition-colors">Contact</a>
+    <footer className="w-full py-10 bg-white border-t border-slate-100 mt-auto">
+      <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-5">
+        <div className="flex gap-10 text-sm font-semibold text-slate-400">
+          <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-primary transition-colors">Support</a>
         </div>
+        <p className="text-slate-400 text-xs font-medium">
+          &copy; {new Date().getFullYear()} Salon Bhagi. All rights reserved.
+        </p>
       </div>
     </footer>
   );

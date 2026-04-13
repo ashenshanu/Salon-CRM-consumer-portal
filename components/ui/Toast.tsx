@@ -19,7 +19,7 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 const typeClasses: Record<ToastType, string> = {
   success: 'bg-green-600 text-white',
   error: 'bg-red-600 text-white',
-  info: 'bg-stone-800 text-white',
+  info: 'bg-slate-800 text-white',
   warning: 'bg-amber-500 text-white',
 };
 

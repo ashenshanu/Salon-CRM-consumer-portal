@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useMutation } from '@apollo/client/react';
-import { RESET_PASSWORD } from '@/lib/graphql/mutations';
+import { SET_PASSWORD } from '@/lib/graphql/mutations';
 import FormError from '@/components/ui/FormError';
 import { useToast } from '@/components/ui/Toast';
 
@@ -42,16 +41,13 @@ function IconInput({
   );
 }
 
-function ResetPasswordForm() {
-  const params = useSearchParams();
+export default function SetPasswordPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const token = params.get('token') || '';
-
   const [form, setForm] = useState({ password: '', confirm: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState('');
-  const [resetPassword, { loading }] = useMutation(RESET_PASSWORD);
+  const [setPassword, { loading }] = useMutation(SET_PASSWORD);
 
   function validate() {
     const errs: Record<string, string> = {};
@@ -66,16 +62,15 @@ function ResetPasswordForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setServerError('');
-    if (!token) { setServerError('Invalid or missing reset token. Please request a new one.'); return; }
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setErrors({});
     try {
-      await resetPassword({ variables: { token, newPassword: form.password } });
-      toast('Password updated successfully. Please sign in.', 'success');
-      router.push('/sign-in');
+      await setPassword({ variables: { password: form.password } });
+      toast('Password set successfully!', 'success');
+      router.push('/account');
     } catch (err: unknown) {
-      setServerError(err instanceof Error ? err.message : 'Reset failed. The link may have expired.');
+      setServerError(err instanceof Error ? err.message : 'Failed to set password. Please try again.');
     }
   }
 
@@ -94,14 +89,14 @@ function ResetPasswordForm() {
     <>
       {/* Page title */}
       <div className="text-center mb-8">
-        <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 mb-5">
-          <svg className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-tertiary/10 mb-5">
+          <svg className="h-8 w-8 text-tertiary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold font-headline text-on-surface mb-2">Reset Password</h1>
+        <h1 className="text-3xl font-bold font-headline text-on-surface mb-2">Set Your Password</h1>
         <p className="text-on-surface-variant font-medium text-sm">
-          Choose a strong new password for your account
+          Create a strong password to secure your account
         </p>
       </div>
 
@@ -136,24 +131,9 @@ function ResetPasswordForm() {
           disabled={loading}
           className="w-full bg-tertiary text-white font-bold py-4 rounded-full shadow-lg shadow-tertiary/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 disabled:opacity-60 disabled:scale-100 font-headline text-base mt-2"
         >
-          {loading ? 'Resetting…' : 'Reset Password'}
+          {loading ? 'Setting password…' : 'Set Password'}
         </button>
-
-        <Link
-          href="/sign-in"
-          className="flex items-center justify-center w-full py-2.5 text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors"
-        >
-          ← Back to Sign In
-        </Link>
       </form>
     </>
-  );
-}
-
-export default function ResetPasswordPage() {
-  return (
-    <Suspense>
-      <ResetPasswordForm />
-    </Suspense>
   );
 }

@@ -41,7 +41,7 @@ export default function CountdownTimer({ expiresAt, onExpire, className = '' }: 
           ? 'bg-red-100 text-red-700'
           : isUrgent
           ? 'bg-amber-100 text-amber-700 animate-pulse'
-          : 'bg-stone-100 text-stone-700',
+          : 'bg-stone-100 text-slate-700',
         className,
       ].join(' ')}
       aria-live="polite"

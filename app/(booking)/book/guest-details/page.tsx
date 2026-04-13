@@ -63,11 +63,11 @@ export default function GuestDetailsPage() {
   return (
     <div className="py-4">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-stone-900 mb-1">Recipient&apos;s details</h1>
-        <p className="text-stone-500 text-sm">Tell us about who this appointment is for.</p>
+        <h1 className="text-2xl font-bold text-slate-900 mb-1">Recipient&apos;s details</h1>
+        <p className="text-slate-500 text-sm">Tell us about who this appointment is for.</p>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-stone-100 shadow-sm p-6 space-y-4">
+      <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-4">
         <div className="grid grid-cols-2 gap-3">
           <div>
             <Label htmlFor="firstName" required>First name</Label>
