@@ -31,7 +31,7 @@ function formatPrice(variants: ServiceVariant[]): string {
   const prices = variants.map((v) => v.price);
   const min = Math.min(...prices);
   const max = Math.max(...prices);
-  return min === max ? `£${min.toFixed(2)}` : `From £${min.toFixed(2)}`;
+  return min === max ? `රු ${min.toFixed(2)}` : `From රු ${min.toFixed(2)}`;
 }
 
 function formatDuration(variants: ServiceVariant[]): string {

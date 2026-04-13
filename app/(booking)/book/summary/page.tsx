@@ -187,7 +187,7 @@ export default function SummaryPage() {
                 <span className="text-slate-900 text-sm font-medium">{svc.name}</span>
                 {svc.variants.length > 0 && (
                   <span className="text-slate-500 text-sm">
-                    From £{Math.min(...svc.variants.map((v) => v.price)).toFixed(2)}
+                    From රු {Math.min(...svc.variants.map((v) => v.price)).toFixed(2)}
                   </span>
                 )}
               </li>

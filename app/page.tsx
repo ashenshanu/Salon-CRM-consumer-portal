@@ -96,10 +96,10 @@ const SERVICE_CATEGORIES = [
 ];
 
 const SERVICES = [
-  { icon: ScissorsIcon, name: "Women's Haircut & Style", desc: 'Precision cut followed by professional styling.', duration: '45m', price: '£65' },
-  { icon: PaletteIcon, name: 'Balayage & Colour', desc: 'Hand-painted highlights for a sun-kissed look.', duration: '2h', price: '£120' },
-  { icon: HandIcon, name: 'Gel Manicure', desc: 'Long-lasting gel polish with cuticle care.', duration: '1h', price: '£35' },
-  { icon: FaceIcon, name: 'Luxury Facial', desc: 'Deep cleanse and hydration treatment.', duration: '1h 30m', price: '£80' },
+  { icon: ScissorsIcon, name: "Women's Haircut & Style", desc: 'Precision cut followed by professional styling.', duration: '45m', price: 'රු 6,500' },
+  { icon: PaletteIcon, name: 'Balayage & Colour', desc: 'Hand-painted highlights for a sun-kissed look.', duration: '2h', price: 'රු 12,000' },
+  { icon: HandIcon, name: 'Gel Manicure', desc: 'Long-lasting gel polish with cuticle care.', duration: '1h', price: 'රු 3,500' },
+  { icon: FaceIcon, name: 'Luxury Facial', desc: 'Deep cleanse and hydration treatment.', duration: '1h 30m', price: 'රු 8,000' },
 ];
 
 const FAQ_ITEMS = [

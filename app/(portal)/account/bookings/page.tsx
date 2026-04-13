@@ -137,14 +137,14 @@ export default function BookingsPage() {
           {booking.services.map((svc) => (
             <li key={svc.serviceId} className="flex items-center justify-between text-sm">
               <span className="text-slate-700">{svc.service.name}</span>
-              <span className="text-slate-400 font-medium">£{svc.priceAtBooking.toFixed(2)}</span>
+              <span className="text-slate-400 font-medium">රු{svc.priceAtBooking.toFixed(2)}</span>
             </li>
           ))}
         </ul>
 
         <div className="flex items-center justify-between pt-3 border-t border-slate-50">
           <p className="text-sm font-bold text-on-surface">
-            Total: £{booking.totalPrice.toFixed(2)}
+            Total: රු{booking.totalPrice.toFixed(2)}
           </p>
           {canCancel && (
             <button

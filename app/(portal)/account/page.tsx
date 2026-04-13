@@ -92,7 +92,7 @@ function ChevronRightIcon() {
 // ── Helpers ────────────────────────────────────────────────────────────────
 
 function timeSince(dateStr: string): string {
-  const days = Math.floor((Date.now() - new Date(dateStr + 'T00:00:00').getTime()) / 86400000);
+  const days = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
   if (days === 0) return 'Today';
   if (days === 1) return '1 day ago';
   if (days < 7) return `${days} days ago`;
