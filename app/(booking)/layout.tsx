@@ -50,8 +50,8 @@ function ReviewIcon({ className = 'h-6 w-6' }: { className?: string }) {
 
 const STEPS = [
   { label: 'Services', step: 1, Icon: ServiceIcon, paths: ['/book/services'] },
-  { label: 'Stylist', step: 2, Icon: StylistIcon, paths: ['/book/staff'] },
-  { label: 'Schedule', step: 3, Icon: CalendarIcon, paths: ['/book/datetime'] },
+  { label: 'Schedule', step: 2, Icon: CalendarIcon, paths: ['/book/datetime'] },
+  { label: 'Stylist', step: 3, Icon: StylistIcon, paths: ['/book/staff'] },
   { label: 'Client Info', step: 4, Icon: PersonIcon, paths: ['/book/guest-email', '/book/guest-details', '/book/for-who'] },
   { label: 'Review', step: 5, Icon: ReviewIcon, paths: ['/book/summary', '/book/confirmed'] },
 ];
