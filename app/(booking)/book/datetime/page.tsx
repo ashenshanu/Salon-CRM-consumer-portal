@@ -34,7 +34,7 @@ export default function DateTimePage() {
     fetchPolicy: 'network-only',
   });
 
-  const availableSlots = (data?.availableSlots ?? []).filter((s) => s.isAvailable);
+  const allSlots = data?.availableSlots ?? [];
 
   function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDate(e.target.value);
@@ -77,21 +77,24 @@ export default function DateTimePage() {
             </div>
           ) : error ? (
             <p className="text-sm text-red-600">{error.message}</p>
-          ) : availableSlots.length === 0 ? (
+          ) : allSlots.length === 0 ? (
             <p className="text-sm text-slate-500 py-4 text-center">
-              No available slots for this date. Try another day.
+              No slots for this date. Try another day.
             </p>
           ) : (
             <div className="grid grid-cols-4 gap-2">
-              {availableSlots.map((slot) => (
+              {allSlots.map((slot) => (
                 <button
                   key={slot.time}
-                  onClick={() => setSelectedTime(slot.time)}
+                  disabled={!slot.isAvailable}
+                  onClick={() => slot.isAvailable && setSelectedTime(slot.time)}
                   className={[
                     'rounded-lg border py-2 text-sm font-medium transition-colors',
-                    selectedTime === slot.time
-                      ? 'border-primary bg-primary text-white'
-                      : 'border-slate-100 bg-white text-slate-700 hover:border-slate-300',
+                    !slot.isAvailable
+                      ? 'border-slate-100 bg-slate-50 text-slate-300 cursor-not-allowed line-through'
+                      : selectedTime === slot.time
+                        ? 'border-primary bg-primary text-white'
+                        : 'border-slate-100 bg-white text-slate-700 hover:border-slate-300',
                   ].join(' ')}
                 >
                   {slot.time}
