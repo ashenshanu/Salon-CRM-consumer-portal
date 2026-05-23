@@ -13,15 +13,32 @@ interface TimeSlot {
   isAvailable: boolean;
 }
 
-function getMinDate(): string {
-  return new Date().toISOString().split('T')[0];
+const BUFFER_MINUTES = 30;
+
+function getLocalDateString(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function getLocalCutoffTime(): string | null {
+  const today = getLocalDateString();
+  // Only applies when the selected date is today — return null for future dates
+  return today; // caller compares selected date against this
+}
+
+function slotPassedLocally(slotTime: string): boolean {
+  const now = new Date();
+  const cutoff = now.getHours() * 60 + now.getMinutes() + BUFFER_MINUTES;
+  const [h, m] = slotTime.split(':').map(Number);
+  return h * 60 + m <= cutoff;
 }
 
 export default function DateTimePage() {
   const router = useRouter();
   const { selectedServiceIds, bookingDate, bookingTime, setDateTime } = useBookingStore();
 
-  const [date, setDate] = useState(bookingDate || getMinDate());
+  const today = getLocalDateString();
+  const [date, setDate] = useState(bookingDate || today);
   const [selectedTime, setSelectedTime] = useState(bookingTime || '');
 
   useEffect(() => {
@@ -34,7 +51,13 @@ export default function DateTimePage() {
     fetchPolicy: 'network-only',
   });
 
-  const allSlots = data?.availableSlots ?? [];
+  const isToday = date === getLocalCutoffTime();
+
+  const allSlots = (data?.availableSlots ?? []).map((slot) => ({
+    ...slot,
+    // Client-side guard: also disable past slots based on local time
+    isAvailable: slot.isAvailable && !(isToday && slotPassedLocally(slot.time)),
+  }));
 
   function handleDateChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDate(e.target.value);
@@ -47,8 +70,20 @@ export default function DateTimePage() {
     router.push('/book/staff');
   }
 
+  const hasAnyAvailable = allSlots.some((s) => s.isAvailable);
+
   return (
     <div className="py-4">
+      <button
+        onClick={() => router.back()}
+        className="mb-4 flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-700 transition-colors"
+      >
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+        Back
+      </button>
+
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-slate-900 mb-1">Choose a date &amp; time</h1>
         <p className="text-slate-500 text-sm">Select when you&apos;d like your appointment.</p>
@@ -58,12 +93,17 @@ export default function DateTimePage() {
         <div>
           <label htmlFor="date" className="block text-sm font-medium text-slate-700 mb-1.5">
             Date
+            {isToday && (
+              <span className="ml-2 text-xs font-medium text-primary bg-primary/10 rounded-full px-2 py-0.5">
+                Today
+              </span>
+            )}
           </label>
           <input
             id="date"
             type="date"
             value={date}
-            min={getMinDate()}
+            min={today}
             onChange={handleDateChange}
             className="block w-full rounded-lg border border-slate-200 px-3 py-2.5 text-slate-900 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           />
@@ -80,6 +120,12 @@ export default function DateTimePage() {
           ) : allSlots.length === 0 ? (
             <p className="text-sm text-slate-500 py-4 text-center">
               No slots for this date. Try another day.
+            </p>
+          ) : !hasAnyAvailable ? (
+            <p className="text-sm text-slate-500 py-4 text-center">
+              {isToday
+                ? 'No more slots available today. Please select a future date.'
+                : 'No available slots for this date. Try another day.'}
             </p>
           ) : (
             <div className="grid grid-cols-4 gap-2">
