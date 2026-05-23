@@ -102,11 +102,39 @@ const SERVICES = [
   { icon: FaceIcon, name: 'Luxury Facial', desc: 'Deep cleanse and hydration treatment.', duration: '1h 30m', price: 'රු 8,000' },
 ];
 
-const FAQ_ITEMS = [
-  'How do I book an appointment online?',
-  'Can I book for someone else?',
-  'What is your cancellation policy?',
-  'How do I earn loyalty points?',
+const HELP_ITEMS = [
+  {
+    q: 'How do I book an appointment online?',
+    a: 'Click "Book an Appointment" on the home page or the navigation menu. Choose your services, pick a date and time, select a stylist (or let us choose for you), then confirm your booking. You\'ll receive a confirmation email once it\'s booked.',
+  },
+  {
+    q: 'Can I book for someone else?',
+    a: 'Yes! After signing in, you\'ll be asked who the appointment is for. Select "For someone else" and enter their name, phone number, and preferences. If you\'re booking as a guest, you can still book on behalf of another person.',
+  },
+  {
+    q: 'Can I book without creating an account?',
+    a: 'Absolutely. Choose "Continue as Guest" on the booking start page. You\'ll just need to provide your email address so we can send the booking confirmation. Guest bookings do not earn loyalty points.',
+  },
+  {
+    q: 'What is your cancellation policy?',
+    a: 'We kindly ask for at least 24 hours\' notice if you need to cancel or reschedule. Cancellations made less than 24 hours before the appointment may be subject to a cancellation fee. You can manage your bookings from your account page.',
+  },
+  {
+    q: 'How do I earn loyalty points?',
+    a: 'Loyalty points are awarded automatically to signed-in customers after each completed booking — 1 point for every රු 1 spent. Points can be viewed in your account profile. Redemption offers will be announced in the salon.',
+  },
+  {
+    q: 'How do I choose a stylist?',
+    a: 'During the booking flow you\'ll see a list of stylists available for your chosen date and time. You can pick a specific stylist or select "No preference" and we\'ll assign the best available stylist for you.',
+  },
+  {
+    q: 'What happens if my preferred time slot is unavailable?',
+    a: 'Unavailable slots are shown greyed out so you always see the full schedule. Simply pick any highlighted (available) slot. If no slots suit you on a given day, try selecting a different date — availability updates in real time.',
+  },
+  {
+    q: 'How will I receive my booking confirmation?',
+    a: 'A confirmation email is sent to the address you provided during booking. Signed-in customers can also view all past and upcoming bookings in the "My Bookings" section of their account.',
+  },
 ];
 
 export default function HomePage() {
@@ -209,19 +237,29 @@ export default function HomePage() {
                 </div>
               </section>
 
-              {/* FAQ / Recommendations */}
+              {/* Help Centre Accordion */}
               <section>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">Common Questions</h2>
-                  <Link href="/sign-up" className="text-tertiary text-xs font-bold hover:underline">More tips</Link>
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400">Help Centre</h2>
+                  <span className="text-xs text-slate-400">{HELP_ITEMS.length} articles</span>
                 </div>
-                <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden divide-y divide-slate-50">
-                  {FAQ_ITEMS.map((q) => (
-                    <div key={q} className="p-4 flex items-center gap-4 hover:bg-slate-50 cursor-pointer group">
-                      <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold shrink-0">?</div>
-                      <p className="text-sm font-medium flex-1 text-slate-700">{q}</p>
-                      <ChevronRightIcon />
-                    </div>
+                <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden divide-y divide-slate-100">
+                  {HELP_ITEMS.map((item) => (
+                    <details key={item.q} className="group">
+                      <summary className="flex items-center gap-4 p-4 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold shrink-0">?</div>
+                        <p className="text-sm font-medium flex-1 text-slate-700">{item.q}</p>
+                        <svg
+                          className="h-4 w-4 text-slate-400 shrink-0 transition-transform duration-200 group-open:rotate-180"
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </summary>
+                      <div className="px-4 pb-4 ml-12">
+                        <p className="text-sm text-slate-500 leading-relaxed">{item.a}</p>
+                      </div>
+                    </details>
                   ))}
                 </div>
               </section>
@@ -251,9 +289,6 @@ export default function HomePage() {
                       <span>12 High Street, London</span>
                     </div>
                   </div>
-                  <button className="w-full bg-tertiary text-white py-3 rounded-lg font-bold hover:bg-tertiary/90 transition-colors shadow-lg shadow-tertiary/20 text-sm">
-                    Chat With Us
-                  </button>
                 </div>
               </section>
 
