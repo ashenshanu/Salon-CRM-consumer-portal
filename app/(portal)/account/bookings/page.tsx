@@ -48,7 +48,7 @@ const STATUS_STYLES: Record<string, string> = {
 function parseDate(d: string): Date {
   const ms = Number(d);
   if (!isNaN(ms) && d.trim() !== '') return new Date(ms);
-  if (d.length === 10) return new Date(d + 'T00:00:00');
+  if (d.length === 10) { const [y,m,day] = d.split('-').map(Number); return new Date(y, m-1, day); }
   return new Date(d);
 }
 function formatDate(dateStr: string): string {
