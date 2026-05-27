@@ -20,6 +20,7 @@ interface BookingState {
 
   // Services
   selectedServiceIds: string[];
+  selectedVariants: Record<string, string>; // serviceId → variantId
 
   // Date & time
   bookingDate: string | null; // YYYY-MM-DD
@@ -44,6 +45,7 @@ interface BookingState {
   setGuestFlow: (isGuest: boolean) => void;
   setRecipient: (type: 'self' | 'other', userId?: string, details?: RecipientDetails) => void;
   setServices: (ids: string[]) => void;
+  setVariantMap: (variants: Record<string, string>) => void;
   setDateTime: (date: string, time: string) => void;
   setHold: (sessionToken: string, expiresAt: string) => void;
   setStaff: (staffUserId: string | null, isSalonChoice: boolean) => void;
@@ -58,6 +60,7 @@ const initialState = {
   recipientUserId: null,
   recipientDetails: null,
   selectedServiceIds: [],
+  selectedVariants: {},
   bookingDate: null,
   bookingTime: null,
   sessionToken: null,
@@ -84,6 +87,7 @@ export const useBookingStore = create<BookingState>()(
         }),
 
       setServices: (ids) => set({ selectedServiceIds: ids }),
+      setVariantMap: (variants) => set({ selectedVariants: variants }),
 
       setDateTime: (date, time) => set({ bookingDate: date, bookingTime: time }),
 
