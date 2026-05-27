@@ -12,13 +12,24 @@ import Spinner from '@/components/ui/Spinner';
 import { useToast } from '@/components/ui/Toast';
 
 interface ServiceVariant {
+  id: string;
+  gender: string;
+  ageGroup: string;
   price: number;
+  durationMinutes: number;
 }
 
 interface Service {
   id: string;
   name: string;
   variants: ServiceVariant[];
+}
+
+function variantLabel(v: ServiceVariant): string {
+  const parts: string[] = [];
+  if (v.gender !== 'any') parts.push(v.gender.charAt(0).toUpperCase() + v.gender.slice(1));
+  if (v.ageGroup !== 'any') parts.push(v.ageGroup.charAt(0).toUpperCase() + v.ageGroup.slice(1));
+  return parts.length ? parts.join(' ') : 'Standard';
 }
 
 export default function SummaryPage() {
@@ -28,6 +39,7 @@ export default function SummaryPage() {
   const {
     isGuestFlow,
     selectedServiceIds,
+    selectedVariants,
     bookingDate,
     bookingTime,
     staffUserId,
@@ -187,18 +199,56 @@ export default function SummaryPage() {
           <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">
             Services
           </h2>
-          <ul className="space-y-1">
-            {selectedServices.map((svc) => (
-              <li key={svc.id} className="flex items-center justify-between">
-                <span className="text-slate-900 text-sm font-medium">{svc.name}</span>
-                {svc.variants.length > 0 && (
-                  <span className="text-slate-500 text-sm">
-                    From රු {Math.min(...svc.variants.map((v) => v.price)).toFixed(2)}
-                  </span>
-                )}
-              </li>
-            ))}
+          <ul className="space-y-2">
+            {selectedServices.map((svc) => {
+              const chosenVariant = svc.variants.find((v) => v.id === selectedVariants[svc.id]);
+              const fallbackVariant = svc.variants.length === 1 ? svc.variants[0] : null;
+              const displayVariant = chosenVariant ?? fallbackVariant;
+              return (
+                <li key={svc.id} className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-slate-900 text-sm font-medium">{svc.name}</p>
+                    {displayVariant && svc.variants.length > 1 && (
+                      <p className="text-xs text-slate-400 mt-0.5">{variantLabel(displayVariant)}</p>
+                    )}
+                  </div>
+                  <div className="text-right shrink-0">
+                    {displayVariant ? (
+                      <>
+                        <p className="text-sm font-semibold text-slate-900">
+                          රු {displayVariant.price.toFixed(2)}
+                        </p>
+                        <p className="text-xs text-slate-400">{displayVariant.durationMinutes} min</p>
+                      </>
+                    ) : svc.variants.length > 0 ? (
+                      <p className="text-sm text-slate-400">
+                        From රු {Math.min(...svc.variants.map((v) => v.price)).toFixed(2)}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
+          {/* Total */}
+          {selectedServices.some((s) => {
+            const cv = s.variants.find((v) => v.id === selectedVariants[s.id]);
+            return cv ?? (s.variants.length === 1 ? s.variants[0] : null);
+          }) && (
+            <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3">
+              <span className="text-sm font-semibold text-slate-700">Estimated Total</span>
+              <span className="text-base font-bold text-slate-900">
+                රු{' '}
+                {selectedServices
+                  .reduce((sum, s) => {
+                    const cv = s.variants.find((v) => v.id === selectedVariants[s.id]);
+                    const fv = s.variants.length === 1 ? s.variants[0] : null;
+                    return sum + ((cv ?? fv)?.price ?? 0);
+                  }, 0)
+                  .toFixed(2)}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="border-t border-slate-100" />
